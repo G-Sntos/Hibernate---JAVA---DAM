@@ -1,0 +1,59 @@
+EMPRESA - Tienda de Ropas -Machote S.L
+SQL - MYSQL
+Las dependencias lo he agregado con Maven. pom.xml
+Sinceramente, deberia haber lo aprendido más pronto.
+
+Todo los acciones que devuelve una consulta de la tabla se muestra a traves de la consola.
+
+
+Insertar - Producto - Cliente
+Eliminar - Producto - Cliente
+Listado - Articulo Parte Superior- Articulo Parte Inferior - Cliente
+Modifica - Modificar un producto - Modifica Cliente
+Consultas -
+(5):
+Usando el HQL.
+
+
+
+
+Tablas MYSQL - Codigo SQL.
+
+CREATE TABLE cliente(
+idCliente INT(5) PRIMARY KEY AUTO_INCREMENT,
+nombre CHAR(30) NOT NULL,
+email CHAR(30),
+telefono INT(12),
+fechaAlta DATE);
+
+-- Table: parteInferior
+CREATE TABLE parteInferior(
+idArticuloInferior INT(5) PRIMARY KEY AUTO_INCREMENT,
+nombreProducto CHAR(30) NOT NULL,
+tipoProducto CHAR(30),
+tallaProducto CHAR(1),
+cantidadDisponible INT(10),
+precioInferior INT(5));
+
+-- Table: parteSuperior
+CREATE TABLE parteSuperior(
+idArticuloSuperior INT(5) PRIMARY KEY AUTO_INCREMENT,
+nombreProducto CHAR(30) NOT NULL,
+tipoProducto CHAR(30),
+tallaProducto CHAR(5),
+cantidadDisponible INT(10),
+precioSuperior INT(5));
+
+-- Table: pedidos
+CREATE TABLE pedidos(
+idPedido INT(5) PRIMARY KEY AUTO_INCREMENT,
+idCliente INT(5), 
+articuloSuperior INT(5) NOT NULL,
+articuloInferior INT(5) NOT NULL,
+cantidadProductoTotal INT(3) NOT NULL,
+precioTotal INT(12),
+fechaCompra DATE,
+FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
+FOREIGN KEY (articuloSuperior) REFERENCES parteSuperior(idArticuloSuperior),
+FOREIGN KEY (articuloInferior) REFERENCES parteInferior(idArticuloInferior));
+
